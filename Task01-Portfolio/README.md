@@ -40,6 +40,10 @@ A basic calculator using HTML, CSS, and JavaScript.
 Guess the Number Game
 A small JavaScript game using logic and DOM manipulation.
 
+## Screenshot : 
+<img width="707" height="398" alt="image" src="https://github.com/user-attachments/assets/185ed7b3-3e6e-45b3-ba50-e6a47f2b3a57" />
+
+
 ## About Me
 
 I am Lazik Latief, a BCA student learning frontend development.
