@@ -1,7 +1,7 @@
 // Creating an object oj1 with different properties
 let oj1 = {
-  name: "Lazik",          // string value
-  age: 22,               // number value
+  name: "Lazik", // string value
+  age: 22, // number value
 
   // nested object (object inside object)
   address: {
@@ -9,8 +9,8 @@ let oj1 = {
     village: "watlab",
   },
 
-  Number: 9797685148,     // phone number
-  working: true,         // boolean value
+  Number: 9797685148, // phone number
+  working: true, // boolean value
 };
 
 // Print complete object oj1
@@ -152,3 +152,112 @@ console.log(name);
 // Destructure and rename variable
 const { teacher: sir } = course;
 console.log(sir);
+
+// Functions >
+
+// This function takes two parameters (a and c)
+// It adds them and prints the result
+function addNum(a, c) {
+  console.log(a + c); // logs sum directly
+  const result = a + c; // stores sum in a variable
+  console.log(result); // logs stored result
+}
+
+// Called without arguments → a and c become undefined
+addNum();
+
+// Called with values → works correctly
+addNum(3, 7);
+
+// This function handles login message
+function login(userName) {
+  // Template string for message
+  let ss = `${userName} just logge in `;
+  console.log(ss); // prints login message
+}
+
+// Function calls with different usernames
+login("Lazik");
+login("zooonii");
+
+// Logout function
+function logout(who) {
+  let aa = `${who} just logge out`; // message created
+  console.log(aa); // message printed
+}
+
+logout("Rayyan");
+logout("wasif");
+logout("Lukman");
+
+// Login function with validation
+function Login(username) {
+  // Check if username is not provided
+  if (username === undefined) {
+    console.log("please enter username");
+    // return stops function execution (but commented here)
+  }
+
+  console.log("this part is reachable");
+
+  // Function returns this string
+  return `${username} just logge in`;
+
+  // This will never run because return is above
+  console.log(
+    "this part is unreachable cz after retrun only i thing gets returne "
+  );
+}
+
+// Called without argument
+Login();
+
+// Called with argument
+Login("Muzu");
+
+// Logs returned value
+console.log(Login("Muzu2"));
+
+// Rest parameter example
+function calculateCart(...num) {
+  // num becomes an array of all arguments
+  console.log(num);
+}
+
+calculateCart(211, 333, 55, 44, 77, 121);
+
+// Function with normal + rest parameters
+function calPrice(val1, val2, ...num) {
+  console.log(num); // remaining values as array
+  console.log(val1, val2, ...num); // all values printed
+}
+
+calPrice(77, 88, 44, 5, 555, 55, 66, 6);
+
+// Object example
+const user = {
+  username: "Lazik Lone",
+  age: 23,
+  job: true,
+};
+
+// Function that accepts an object
+function handleObject(anyobject) {
+  console.log(
+    `username is ${anyobject.username} and age is ${anyobject.age} and is job ${anyobject.job}`
+  );
+}
+
+// Passing object to function
+handleObject(user);
+
+// Array example
+const newArray = [55, 99, 33, 7];
+
+// Function that returns value from array
+function returnValue(getArray) {
+  return getArray[1]; // returns second element
+}
+
+console.log(returnValue(newArray));
+console.log(returnValue([44, 22, 8, 33]));
