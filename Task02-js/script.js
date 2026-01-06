@@ -261,3 +261,90 @@ function returnValue(getArray) {
 
 console.log(returnValue(newArray));
 console.log(returnValue([44, 22, 8, 33]));
+
+// =======================
+// SCOPES IN JAVASCRIPT
+// =======================
+
+// let a = 10        // block scoped (only inside its block)
+// const h = 40      // block scoped
+// var p = 99        // function scoped (not block scoped)
+
+// var p = 77       // var allows re-declaration (not recommended)
+
+let a = 80;         // global scope variable
+
+// -----------------------
+// BLOCK SCOPE
+// -----------------------
+if (true) {
+  let a = 10;       // this 'a' is block scoped (different from global 'a')
+  const h = 40;     // const is also block scoped
+  // var p = 50     // var ignores block scope and becomes global
+
+  console.log("Inner >", a); // prints 10 (block variable)
+}
+
+console.log(a); // prints 80 (global 'a')
+
+// ❌ Error: h is not defined (because h is block scoped)
+// console.log(h);
+
+// ❌ Error if var p is commented everywhere
+// console.log(p);
+
+// -----------------------
+// NESTED SCOPE
+// -----------------------
+function one() {
+  const username = "LAZIK"; // function scope
+
+  function two() {
+    const website = "YOUTUBE"; // inner function scope
+    console.log(username);     // ✅ inner function can access outer variables
+  }
+
+  // ❌ Error: website is not defined (belongs to function two)
+  // console.log(website);
+
+  two();
+}
+one();
+
+// -----------------------
+// BLOCK + NESTED IF
+// -----------------------
+if (true) {
+  const username = "Lazik"; // block scope
+
+  if (username === "Lazik") {
+    const website = " Portfolio"; // inner block scope
+    console.log(username + website); // ✅ accessible here
+  }
+
+  // ❌ Error: website is block scoped
+  // console.log(website);
+}
+
+// ❌ Error: username is block scoped
+// console.log(username);
+
+// =======================
+// HOISTING
+// =======================
+
+// Function declaration is hoisted
+function adone(num) {
+  return num + 1;
+}
+
+adone(8); // ✅ works because function declaration is hoisted
+
+// ❌ Error: Cannot access 'adtwo' before initialization
+// adtwo(4);
+
+const adtwo = function (num) {
+  return num + 1;
+};
+
+adtwo(5); // ✅ works after initialization

@@ -12,3 +12,11 @@
 8. Rest operator (...) is used to handle multiple arguments.
 9. Functions receiving objects and arrays are practiced.
 10. Overall focus is on core JavaScript fundamentals.
+
+
+## In this practice
+1. I explored JavaScript scopes including global, block, and function scope.
+2. learned how let and const are block-scoped while var is function-scoped.
+3. The examples demonstrate nested scopes and how inner functions can access outer variables.
+4. I also practiced scope errors that occur when accessing variables outside their scope.
+5. Finally, I understood hoisting differences between function declarations and function expressions.
