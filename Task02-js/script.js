@@ -348,3 +348,87 @@ const adtwo = function (num) {
 };
 
 adtwo(5); // ✅ works after initialization
+
+// Arrow Functions & `this` keyword
+// ES6+
+
+// Object with a method
+const User = {
+  name: "LaZIK",
+  price: 999,
+
+  // Normal function → `this` refers to the object (User)
+  welcome: function () {
+    console.log(`${this.name}, welcome to page`);
+    console.log(this); // shows the User object
+  }
+}
+
+// Just referencing the function (not calling it)
+User.welcome
+
+// Calling the function → works
+User.welcome()
+
+// Updating object property
+User.name = "AZHAr"
+
+// `this.name` now uses updated value
+User.welcome()
+
+// In Node.js (VS Code terminal), `this` here is an empty object {}
+// In browser, `this` refers to the window object
+console.log(this);
+
+// Normal function (NOT inside object)
+function One() {
+  let username = "RaYYAN"
+
+  // `this.username` is undefined
+  // because `this` does NOT refer to function variables
+  console.log(this.username);
+
+  // In Node.js → empty object {}
+  // In browser → window object
+  console.log(this);
+}
+One()
+
+// -----------------------------
+// `this` in function expressions
+
+// Normal function expression
+// const chai = function () {
+//   let username = "Lukman"
+//   console.log(this.username); // undefined
+//   console.log(this); // depends on environment
+// }
+// chai()
+
+// Arrow function
+// Arrow functions DO NOT have their own `this`
+// They take `this` from their surrounding scope
+// const chai = () => {
+//   let username = "Lukman"
+//   console.log(this); // usually {}
+// }
+// chai()
+
+// -----------------------------
+// Arrow function return types
+
+// Explicit return (when using curly braces {})
+// const plus = (a, c) => {
+//   return a + c
+// }
+
+// Implicit return (no {} → return is automatic)
+const plus = (a, c) => a + c
+
+console.log(plus(9, 5));
+
+// NOTE:
+// If returning an object using arrow function,
+// wrap it in parentheses ()
+// Example:
+// const getUser = () => ({ name: "Lazik" })

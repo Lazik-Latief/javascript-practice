@@ -20,3 +20,14 @@
 3. The examples demonstrate nested scopes and how inner functions can access outer variables.
 4. I also practiced scope errors that occur when accessing variables outside their scope.
 5. Finally, I understood hoisting differences between function declarations and function expressions.
+
+## In this practice (day-10)
+
+1. This file demonstrates how the `this` keyword works in JavaScript.
+2. It explains `this` behavior inside objects using normal functions.
+3. It shows why `this` does not access local variables in normal functions.
+4. Arrow functions are used to demonstrate that they do not have their own `this`.
+5. The difference between `this` in browser and Node.js environments is highlighted.
+6. Examples compare function expressions and arrow functions.
+7. Arrow function implicit and explicit return concepts are included.
+8. This practice strengthens understanding of JavaScript execution context.
