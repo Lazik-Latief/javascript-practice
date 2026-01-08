@@ -432,3 +432,33 @@ console.log(plus(9, 5));
 // wrap it in parentheses ()
 // Example:
 // const getUser = () => ({ name: "Lazik" })
+
+// Immediately Invoked Function Expressions (IIFE)
+// IIFE runs immediately after it is defined
+
+// Normal function example
+// function hi(){
+//   console.log("Connect hogaya");
+// }
+// hi()
+
+// IIFE syntax needs parentheses () to avoid errors
+// Semicolon is important to stop previous code execution issues
+
+(function hi(){
+  // Named IIFE
+  // Executes immediately after definition
+  console.log("connect hogaya");
+})();
+
+(() =>{
+  // Arrow function IIFE
+  // Useful for short, clean execution
+  console.log("connected now");
+})();
+
+((name)=>{
+  // IIFE with parameter
+  // Helps pass data safely without polluting global scope
+  console.log(`connected with ${name}`);
+})("LAZIK-LONE");

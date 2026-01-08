@@ -31,3 +31,12 @@
 6. Examples compare function expressions and arrow functions.
 7. Arrow function implicit and explicit return concepts are included.
 8. This practice strengthens understanding of JavaScript execution context.
+
+
+## In this practice (day-11)
+
+1. This practice demonstrates IIFE (Immediately Invoked Function Expressions) in JavaScript.
+2. IIFE runs automatically without calling the function.
+3. It helps avoid global scope pollution.
+4. Both normal and arrow function IIFE examples are used.
+5. Parameters can also be passed inside an IIFE.
