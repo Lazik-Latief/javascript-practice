@@ -40,3 +40,11 @@
 3. It helps avoid global scope pollution.
 4. Both normal and arrow function IIFE examples are used.
 5. Parameters can also be passed inside an IIFE.
+
+## Day 12 focused on understanding callbacks and the JavaScript call stack.
+Learned how callback functions are passed and executed inside other functions.
+Practiced simple examples to see the order of execution.
+Understood how the call stack works step by step.
+Learned why functions are added and removed from the stack.
+This helped me understand execution flow in JavaScript.
+Part of my daily Let’s Code practice journey. 🚀
