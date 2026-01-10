@@ -462,3 +462,70 @@ console.log(plus(9, 5));
   // Helps pass data safely without polluting global scope
   console.log(`connected with ${name}`);
 })("LAZIK-LONE");
+
+// FOR LOOP BASIC EXAMPLE
+// Loop starts from 0 and runs till 10
+
+for (let i = 0; i <= 10; i++) {
+    const element = i;
+
+    // Check when value is 5
+    if (element == 5) {
+        console.log("5 is best number");
+    }
+
+    // Print current value
+    console.log(element);
+}
+
+// element is block-scoped, so it cannot be accessed outside the loop
+// console.log(element); // ❌ error
+
+
+// NESTED FOR LOOP
+// Used here to create a multiplication table
+
+for (let i = 1; i <= 10; i++) {
+    console.log(`Outer loop value: ${i}`);
+
+    for (let j = 1; j <= 10; j++) {
+        // Multiply outer loop value with inner loop value
+        console.log(i + '*' + j + ' = ' + i * j);
+    }
+}
+
+
+// LOOPING THROUGH ARRAY
+let myArray = ["flash", "batman", "superman"];
+
+console.log(myArray.length); // Length of array
+
+for (let index = 0; index < myArray.length; index++) {
+    // Access array element using index
+    const element = myArray[index];
+    console.log(element);
+}
+
+
+// BREAK STATEMENT
+// Stops the loop completely when condition is met
+
+for (let index = 1; index <= 20; index++) {
+    if (index == 5) {
+        console.log(`Detected 5`);
+        break; // Exit the loop
+    }
+    console.log(`Value of i is ${index}`);
+}
+
+
+// CONTINUE STATEMENT
+// Skips current iteration and continues with next one
+
+for (let index = 1; index <= 20; index++) {
+    if (index == 5) {
+        console.log(`Detected 5`);
+        continue; // Skip printing for 5
+    }
+    console.log(`Value of i is ${index}`);
+}
