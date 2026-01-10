@@ -40,15 +40,3 @@
 3. It helps avoid global scope pollution.
 4. Both normal and arrow function IIFE examples are used.
 5. Parameters can also be passed inside an IIFE.
-
-## In this practice (day-12)
-
-## – JavaScript Loops Practice
-
-1. Practiced for loops to understand iteration and control flow.
-2. Used conditional checks inside loops to handle specific values.
-3. Implemented nested for loops to generate multiplication tables.
-4. Learned how to iterate through arrays using loop and index.
-5. Practiced break to stop loop execution when a condition is met.
-6. Practiced continue to skip a specific iteration and move to the next one.
-7. Improved understanding of loop behavior and scope in JavaScript.
