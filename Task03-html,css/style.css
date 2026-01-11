@@ -1,0 +1,27 @@
+/* Styling the main container */
+.top {
+  background-color: rgb(5, 142, 188); /* Background color */
+  height: 100vh; /* Full viewport height */
+
+  /* Flexbox (commented for later practice)
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  */
+
+  padding: 40px; /* Space inside the container */
+}
+
+/* Styling heading */
+h1 {
+  text-align: center; /* Center text */
+  border: 4px solid black; /* Border around heading */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Space inside heading */
+}
+
+/* Styling paragraph text */
+p {
+  margin-top: 20px; /* Space above paragraph */
+  font-size: 16px; /* Text size */
+}
