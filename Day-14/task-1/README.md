@@ -38,6 +38,8 @@ It focuses on **DOM manipulation**, **loops**, **events**, and **basic styling**
 - Dynamic styling
 
 ---
+## Screenshot : <img width="934" height="346" alt="image" src="https://github.com/user-attachments/assets/5d02ef1a-02af-49a6-9709-bc37bd58bb9e" />
+
 
  
 
