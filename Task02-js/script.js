@@ -529,3 +529,72 @@ for (let index = 1; index <= 20; index++) {
     }
     console.log(`Value of i is ${index}`);
 }
+
+// Example 1: while loop
+// while loop pehle condition check karta hai
+// Agar condition true hogi tabhi loop chalega
+
+let i = 0;
+
+while (i <= 10) { 
+  console.log(i);   // prints current value of i
+  i++;              // increment i by 1
+}
+// Output: 0 to 10
+
+// Example 2: do...while loop
+// do...while loop pehle code execute karta hai
+// phir condition check karta hai
+// Isliye kam se kam 1 baar toh chalega hi
+
+let aa = 0;
+
+do {
+  console.log(aa);  // prints current value of aa
+  aa++;             // increment aa
+} while (aa <= 8);
+
+// Output: 0 to 8
+
+// Example 3: do...while with FALSE condition
+// Yaha condition starting se hi false hai
+// Phir bhi loop ek baar chalega
+
+let cc = 6;
+
+do {
+  console.log(cc);  // prints 6
+  cc++;             // increment cc to 7
+} while (cc <= 4);
+
+// Output: 6
+
+let x = 10;
+
+while (x < 5) {
+  console.log(x);
+  x++;
+}
+
+// Output: nothing
+
+let y = 10;
+
+do {
+  console.log(y);
+  y++;
+} while (y < 5);
+
+// Output: 10
+
+let attempts = 1;
+
+do {
+  console.log("Attempt number:", attempts);
+  attempts++;
+} while (attempts <= 3);
+
+// Output:
+// Attempt number: 1
+// Attempt number: 2
+// Attempt number: 3

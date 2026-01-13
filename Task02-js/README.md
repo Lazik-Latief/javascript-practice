@@ -44,3 +44,13 @@
 5. Practiced break to stop loop execution when a condition is met.
 6. Practiced continue to skip a specific iteration and move to the next one.
 7. Improved understanding of loop behavior and scope in JavaScript.
+
+## In this practice (day-13)
+
+- A while loop checks the condition before executing the loop body.
+- If the condition is false, the while loop may not run at all.
+- A do...while loop executes the loop body at least once.
+- In do...while, the condition is checked after the first execution.
+- while is used when you are not sure the loop should run even once.
+- do...while is used when at least one execution is required.
+
