@@ -598,3 +598,113 @@ do {
 // Attempt number: 1
 // Attempt number: 2
 // Attempt number: 3
+
+// ===============================
+// FOR...OF LOOP
+// Used for iterating over ITERABLES
+// (Array, String, Map, Set)
+// ===============================
+
+let arr = [1, 2, 3, 4, 5, 6];
+
+for (const element of arr) {
+  console.log(element); // prints each value of array
+}
+
+// ❌ Objects are NOT iterable using for...of
+// This will throw: TypeError: obj is not iterable
+/*
+let objError = {
+  name: "Lazik",
+  age: 23
+};
+
+for (const element of objError) {
+  console.log(element);
+}
+*/
+
+
+// ===============================
+// FOR...IN LOOP
+// Used for iterating over OBJECT KEYS
+// ===============================
+
+let obj = {
+  name: "Lazik",
+  age: 23
+};
+
+// prints keys only
+for (const key in obj) {
+  console.log(key);
+}
+
+// prints values using keys
+for (const key in obj) {
+  console.log(obj[key]);
+}
+
+// prints key-value pairs
+for (const key in obj) {
+  console.log(`${key} > ${obj[key]}`);
+}
+
+
+// ===============================
+// MAP EXAMPLE
+// Maps are iterable
+// ===============================
+
+let map = new Map();
+
+map.set('KA', 'KASHMIR');
+map.set('IN', 'INDIA');
+map.set('PK', 'PAKISTAN');
+map.set('KA', 'KASHMIR'); // duplicate key ignored
+
+// for...of works on Map
+for (const element of map) {
+  console.log(element); // [key, value]
+}
+
+// ❌ for...in does NOT work with Map
+/*
+for (const key in map) {
+  console.log(key);
+}
+*/
+
+
+// ===============================
+// EXTRA EXAMPLE 1: for...of with STRING
+// ===============================
+
+let namee = "Lazik";
+
+for (const char of namee) {
+  console.log(char); // prints each character
+}
+
+
+// ===============================
+// EXTRA EXAMPLE 2: for...of with SET
+// ===============================
+
+let set = new Set([1, 2, 3, 3, 4]);
+
+for (const value of set) {
+  console.log(value); // unique values only
+}
+
+
+// ===============================
+// EXTRA EXAMPLE 3: for...in with ARRAY
+// ===============================
+
+let nums = [10, 20, 30];
+
+for (const index in nums) {
+  console.log(index);      // index
+  console.log(nums[index]); // value
+}

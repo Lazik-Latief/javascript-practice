@@ -54,3 +54,13 @@
 - while is used when you are not sure the loop should run even once.
 - do...while is used when at least one execution is required.
 
+
+## 
+# JavaScript Loops Practice
+
+1. This repository contains practice examples of `for...of` and `for...in` loops in JavaScript.
+2. It demonstrates how arrays, objects, strings, maps, and sets behave with different loops.
+3. Each example is written with clear comments for easy understanding.
+4. This practice focuses on learning iteration, data structures, and common mistakes.
+5. The goal is concept clarity rather than optimization.
+
