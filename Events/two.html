@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout & clearTimeout</title>
+</head>
+<body>
+    <h1>Chai aur code</h1>
+    <button id="stop">Stop</button>
+</body>
+
+<script>
+    // -------------------------------
+    // 1️⃣ Simple function (not used here)
+    // -------------------------------
+    const sayHitesh = function () {
+        console.log("Hitesh");
+    };
+    // 👉 This function just logs text
+    // 👉 setTimeout can execute this too
+
+
+    // -------------------------------
+    // 2️⃣ Function to change text
+    // -------------------------------
+    const changeText = function () {
+        document.querySelector('h1').innerHTML = "Best JS Series";
+    };
+    // 👉 This function updates the <h1> text
+
+
+    // -------------------------------
+    // 3️⃣ setTimeout()
+    // -------------------------------
+    // setTimeout(function, time_in_ms)
+    // It runs the function AFTER the given time
+
+    const changeMe = setTimeout(changeText, 2000);
+    // 👉 After 2 seconds (2000 ms), changeText() will run
+    // 👉 setTimeout returns a timeout ID
+    // 👉 We store it in "changeMe"
+
+
+    // -------------------------------
+    // 4️⃣ clearTimeout()
+    // -------------------------------
+    document.querySelector('#stop').addEventListener('click', function () {
+        clearTimeout(changeMe);
+        console.log("STOPPED");
+    });
+    // 👉 If user clicks "Stop" before 2 seconds:
+    // 👉 clearTimeout cancels setTimeout
+    // 👉 Text will NOT change
+
+
+    // -------------------------------
+    // 🔹 EXTRA EXAMPLES (for learning)
+    // -------------------------------
+
+    // Example 1: Logging after delay
+    /*
+    setTimeout(function () {
+        console.log("Hello after 3 seconds");
+    }, 3000);
+    */
+
+    // Example 2: Cancel timeout before execution
+    /*
+    const myTimeout = setTimeout(() => {
+        console.log("This will not run");
+    }, 5000);
+
+    clearTimeout(myTimeout);
+    */
+
+</script>
+</html>

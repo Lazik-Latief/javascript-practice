@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setInterval & clearInterval</title>
+</head>
+<body>
+    <h1>Chai aur Javascript</h1>
+
+    <!-- Buttons to control interval -->
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+
+<script>
+    // -------------------------------
+    // 1️⃣ Function to run repeatedly
+    // -------------------------------
+    const sayDate = function (str) {
+        console.log(str, Date.now());
+    };
+    // 👉 Logs a string + current timestamp
+
+
+    // -------------------------------
+    // 2️⃣ Interval variable (IMPORTANT)
+    // -------------------------------
+    let intervalId;
+    // 👉 We keep this outside so both buttons can access it
+
+
+    // -------------------------------
+    // 3️⃣ START button → setInterval
+    // -------------------------------
+    document.querySelector('#start').addEventListener('click', function () {
+
+        // Prevent multiple intervals
+        if (!intervalId) {
+            intervalId = setInterval(sayDate, 1000, "Hi");
+            console.log("Interval Started");
+        }
+    });
+    // 👉 setInterval runs the function again and again
+    // 👉 Every 1000ms (1 second)
+    // 👉 "Hi" is passed as argument to sayDate()
+
+
+    // -------------------------------
+    // 4️⃣ STOP button → clearInterval
+    // -------------------------------
+    document.querySelector('#stop').addEventListener('click', function () {
+        clearInterval(intervalId);
+        intervalId = null;
+        console.log("Interval Stopped");
+    });
+    // 👉 Stops the running interval
+    // 👉 intervalId reset to avoid bugs
+
+
+    // -------------------------------
+    // ❌ YOUR ORIGINAL CODE ISSUE
+    // -------------------------------
+    /*
+    const intervalId = setInterval(sayDate, 1000, "hi")
+    clearInterval(intervalId)
+
+    👉 This starts and immediately stops the interval
+    👉 So nothing runs
+    */
+</script>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Events</title>
+</head>
+
+<body style="background-color: #414141; color: aliceblue;">
+
+    <h2>Amazing Images (Event Handling)</h2>
+
+    <!-- Parent container for event delegation -->
+    <div>
+        <ul id="images">
+
+            <!-- Each image inside a list item -->
+            <li>
+                <img width="200px" id="photoshop"
+                     src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg"
+                     alt="photoshop">
+            </li>
+
+            <li>
+                <img width="200px" id="japan"
+                     src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg">
+            </li>
+
+            <li>
+                <img width="200px" id="river"
+                     src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg">
+            </li>
+
+            <li>
+                <img width="200px" id="owl"
+                     src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg">
+            </li>
+
+            <li>
+                <img width="200px" id="prayer"
+                     src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg">
+            </li>
+
+            <!-- Anchor tag to demonstrate preventDefault -->
+            <li>
+                <a style="color: aliceblue;" href="https://google.com" id="google">
+                    Google
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+</body>
+
+<script>
+
+    /*
+    =====================================================
+    EVENT BASICS
+    =====================================================
+
+    ❌ Old way (not recommended)
+    element.onclick = function(){}
+
+    ✅ Modern way
+    element.addEventListener('event', callback, useCapture)
+    */
+
+
+    /*
+    =====================================================
+    EVENT OBJECT (e)
+    =====================================================
+
+    Common properties:
+    - e.type
+    - e.target
+    - e.currentTarget
+    - e.preventDefault()
+    - e.stopPropagation()
+    - mouse positions (clientX, clientY)
+    */
+
+
+    /*
+    =====================================================
+    EVENT BUBBLING & CAPTURING
+    =====================================================
+
+    Default behavior = bubbling (false)
+
+    child → parent → document
+
+    stopPropagation() stops bubbling
+    */
+
+
+    /*
+    =====================================================
+    PREVENT DEFAULT BEHAVIOR
+    =====================================================
+    */
+
+    document.getElementById('google').addEventListener('click', function (e) {
+        e.preventDefault();      // stops link navigation
+        e.stopPropagation();     // stops bubbling
+        console.log("Google link clicked but not opened");
+    });
+
+
+    /*
+    =====================================================
+    EVENT DELEGATION (IMPORTANT ⭐)
+    =====================================================
+
+    Instead of adding event listener to every image,
+    we add ONE listener to the parent (ul).
+
+    This improves:
+    ✔ Performance
+    ✔ Scalability
+    ✔ Cleaner code
+    */
+
+
+    document.querySelector('#images').addEventListener('click', function (e) {
+
+        // e.target = exact element clicked
+        console.log("Clicked tag:", e.target.tagName);
+
+        // Only act if an IMAGE is clicked
+        if (e.target.tagName === 'IMG') {
+
+            console.log("Image ID:", e.target.id);
+
+            // Remove the parent <li> of clicked image
+            const removeItem = e.target.parentNode;
+            removeItem.remove();
+        }
+    });
+
+
+    /*
+    =====================================================
+    EXTRA EXAMPLE: MOUSE EVENTS
+    =====================================================
+    */
+
+    document.querySelector('#images').addEventListener('mouseover', function () {
+        console.log("Mouse entered image list");
+    });
+
+
+    /*
+    =====================================================
+    EXTRA EXAMPLE: KEYBOARD EVENT
+    =====================================================
+    */
+
+    document.addEventListener('keydown', function (e) {
+        console.log("Key pressed:", e.key);
+    });
+
+</script>
+
+</html>
