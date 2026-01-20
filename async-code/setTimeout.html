@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>setTimeout Practice</title>
+
+    <!-- Basic styling for readability (not focus of this file) -->
+    <style>
+      body {
+        background-color: chocolate;
+        color: bisque;
+        font-style: italic;
+        padding: 20px;
+      }
+
+      button {
+        margin: 6px 0;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <!-- ================= Example 1 ================= -->
+      <!-- Change text after some delay -->
+      <h1>Example 1: Change text after some time</h1>
+      <h2 id="show"></h2>
+      <button onclick="change()">Change Name</button>
+
+      <hr />
+
+      <!-- ================= Example 2 ================= -->
+      <!-- Text should NOT change if Stop is clicked (before OR after delay) -->
+      <h1 class="newShow">This text can be stopped</h1>
+      <button onclick="stopTimeout()">Stop</button>
+      <h2 id="stopped"></h2>
+
+      <hr />
+
+      <!-- ================= Example 3 ================= -->
+      <!-- Simple delayed welcome message -->
+      <h1 id="welcome">Welcome Message Example</h1>
+
+      <hr />
+
+      <!-- ================= Example 4 ================= -->
+      <!-- Countdown using multiple setTimeout -->
+      <h1 id="countdown">Countdown will start...</h1>
+    </div>
+
+    <script>
+      /* =====================================================
+         Example 1: Toggle name using setTimeout
+         ===================================================== */
+
+      // Select the element where name will be shown
+      const show = document.querySelector("#show");
+
+      // Set initial value
+      show.innerText = "Lazik Lone";
+
+      function change() {
+        // Store current text of h2
+        const currentName = show.innerText;
+
+        // Change text after delay based on current value
+        if (currentName === "Lazik Lone") {
+          setTimeout(() => {
+            show.innerText = "Rayyan Shah";
+          }, 1000); // 1 second delay
+        } else {
+          setTimeout(() => {
+            show.innerText = "Lazik Lone";
+          }, 2000); // 2 seconds delay
+        }
+      }
+
+      /* =====================================================
+         Example 2: Stop text change using flag + clearTimeout
+         ===================================================== */
+
+      // Select elements
+      const neww = document.querySelector(".newShow");
+      const statusText = document.querySelector("#stopped");
+
+      // Flag to check whether user clicked Stop
+      let isStopped = false;
+
+      // Schedule text change after 3 seconds
+      const timeoutId = setTimeout(() => {
+        // IMPORTANT: check flag before changing text
+        if (!isStopped) {
+          neww.innerText = "Not stopped ❌";
+          statusText.innerText =
+            "NO, you did NOT stop it from changing";
+        }
+      }, 3000);
+
+      // Runs when Stop button is clicked
+      function stopTimeout() {
+        // Mark as stopped
+        isStopped = true;
+
+        // Clear timeout (works only if not executed yet)
+        clearTimeout(timeoutId);
+
+        // Update status text
+        statusText.innerText =
+          "YES, you stopped it from changing ✅";
+      }
+
+      /* =====================================================
+         Example 3: Simple welcome message after delay
+         ===================================================== */
+
+      const welcome = document.querySelector("#welcome");
+
+      // Show welcome message after 2 seconds
+      setTimeout(() => {
+        welcome.innerText =
+          "Hello 👋 Welcome to JavaScript setTimeout!";
+      }, 2000);
+
+      /* =====================================================
+         Example 4: Countdown using multiple setTimeout
+         ===================================================== */
+
+      const countdown = document.querySelector("#countdown");
+
+      // Each timeout updates text after specific delay
+      setTimeout(() => {
+        countdown.innerText = "3";
+      }, 1000);
+
+      setTimeout(() => {
+        countdown.innerText = "2";
+      }, 2000);
+
+      setTimeout(() => {
+        countdown.innerText = "1";
+      }, 3000);
+
+      setTimeout(() => {
+        countdown.innerText = "🚀 Go!";
+      }, 4000);
+    </script>
+  </body>
+</html>
