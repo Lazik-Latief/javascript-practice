@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Makes site responsive on all devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XMLHttpRequest - API Call</title>
+  </head>
+
+  <body style="background-color: #212121; color: white; font-family: Arial">
+    <!--
+    XMLHttpRequest readyState values:
+
+    0 - UNSENT
+        ➜ Request object created but open() not called yet
+
+    1 - OPENED
+        ➜ open() method has been called
+
+    2 - HEADERS_RECEIVED
+        ➜ send() has been called
+        ➜ response headers and status are available
+
+    3 - LOADING
+        ➜ Response is downloading
+        ➜ responseText has partial data
+
+    4 - DONE
+        ➜ Request is complete
+        ➜ Full response received
+    -->
+
+    <h2>Check Console for API Data</h2>
+  </body>
+
+  <script>
+    // ----------------------------------------
+    // STEP 1: API URL (Endpoint)
+    // ----------------------------------------
+    // This is the GitHub API endpoint from where we want data
+    const requestUrl = "https://api.github.com/users/Lazik-Latief";
+
+    // ----------------------------------------
+    // STEP 2: Create XMLHttpRequest Object
+    // ----------------------------------------
+    // XMLHttpRequest is used to make HTTP requests in JavaScript
+    const xhr = new XMLHttpRequest();
+
+    // ----------------------------------------
+    // STEP 3: Open the Request
+    // ----------------------------------------
+    // xhr.open(method, url)
+    // GET → we want to get data
+    // requestUrl → API endpoint
+    xhr.open("GET", requestUrl);
+
+    // ----------------------------------------
+    // STEP 4: Track request state changes
+    // ----------------------------------------
+    // This function runs EVERY TIME readyState changes
+    xhr.onreadystatechange = function () {
+      // Print current readyState (0 → 4)
+      console.log("Ready State:", xhr.readyState);
+
+      // When readyState becomes 4 → request is completed
+      if (xhr.readyState === 4) {
+        // responseText comes as STRING (JSON format)
+        // Convert JSON string into JavaScript object
+        const data = JSON.parse(this.responseText);
+
+        // Check type (will be object)
+        console.log("Type of data:", typeof data);
+
+        // Access followers from GitHub API response
+        console.log("Followers:", data.followers);
+
+        console.log("Name:", data.name);
+        console.log("Login:", data.login);
+        console.log("Public-Repos:", data.public_repos);
+        console.log("Avatar:", data.avatar_url);
+
+
+        console.log(data);
+      }
+    };
+
+    // ----------------------------------------
+    // STEP 5: Send the Request
+    // ----------------------------------------
+    // Actually sends the HTTP request to the server
+    xhr.send();
+  </script>
+</html>
