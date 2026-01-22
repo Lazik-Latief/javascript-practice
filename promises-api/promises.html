@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Makes layout responsive on all devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promises</title>
+</head>
+
+<body style="background-color: brown; display: flex; justify-content: center;">
+  
+  <h1>--Chai aur Promises--</h1>
+
+  <script>
+    // ==================================================
+    // PROMISE 1: Basic Promise with resolve()
+    // ==================================================
+    // A Promise takes a function with resolve & reject
+    // resolve() means task completed successfully
+
+    const promiseOne = new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        console.log("Async Task one - after 1 second");
+        resolve(); // marks promise as fulfilled
+      }, 1000);
+    });
+
+    // .then() runs AFTER promise is resolved
+    promiseOne.then(function() {
+      console.log("Promise consumed - after 1 second");
+    });
+
+
+    // ==================================================
+    // PROMISE 2: Promise + then() chaining directly
+    // ==================================================
+    const promiseTwo = new Promise(function(resolve, reject) {
+      setTimeout(() => {
+        console.log("Async Task 2 - after 2 seconds");
+        resolve();
+      }, 2000);
+    }).then(function() {
+      console.log("Async Task 2 consumed - after 2 seconds");
+    });
+
+
+    // ==================================================
+    // PROMISE 3: Resolving with data (object)
+    // ==================================================
+    const promiseThree = new Promise(function(resolve, reject) {
+      setTimeout(() => {
+        // resolve can pass data to .then()
+        resolve({ username: "Lazik Lone", email: "lazik@example.com" });
+        console.log("3rd promise resolved with data - after 3 seconds");
+      }, 3000);
+    });
+
+    promiseThree.then(function(user) {
+      console.log(user); // received object
+      console.log("After 3 seconds");
+    });
+
+
+    // ==================================================
+    // PROMISE 4: Error handling + chaining + finally()
+    // ==================================================
+    const promiseFour = new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        let error = true;
+
+        if (!error) {
+          resolve({ username: "Rayyan Shah", age: "24" });
+          console.log("Promise 4 resolved - after 4 seconds");
+        } else {
+          // reject is used when something goes wrong
+          reject("Error: Something went wrong - after 4 seconds");
+        }
+      }, 4000);
+    });
+
+    promiseFour
+      .then((user) => {
+        console.log(user);
+        // Returning value passes it to next .then()
+        return user.username;
+      })
+      .then((username) => {
+        console.log(username);
+      })
+      .catch(function(error) {
+        // Handles any error from promise
+        console.log(error);
+      })
+      .finally(() => {
+        // Always runs (success or error)
+        console.log(
+          "Promise finished (resolved or rejected) - finally always executes"
+        );
+      });
+
+  </script>
+</body>
+</html>
