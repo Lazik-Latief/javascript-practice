@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API-PRACTICE</title>
+
+  <style>
+    body {
+      background-color: burlywood;
+      display: flex;
+      justify-content: center;
+    }
+    p {
+      font-size: large;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: bisque;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h1>Hey! Practicing APIs</h1>
+
+    <p id="para"></p>
+    <p id="paraa"></p>
+    <p id="para2"></p>
+    <p id="thirdPara"></p>
+  </div>
+
+  <script>
+    console.log("API practice starting...");
+
+    /* ======================================================
+       METHOD 1: CUSTOM PROMISE (Basic Promise Understanding)
+       ====================================================== */
+
+    const promiseOne = new Promise(function (resolve, reject) {
+      // setTimeout simulates async work (like API delay)
+      setTimeout(() => {
+        console.log("Resolving after 2 seconds");
+
+        // resolve sends data to .then()
+        resolve(["Lazik", 23, "Frontend Dev", "Intern at Koshur Scientist"]);
+      }, 2000);
+    });
+
+    const para = document.querySelector("#para");
+
+    // .then() receives resolved data
+    promiseOne.then((user) => {
+      console.log(user);
+      para.innerText = "Promise One Data → " + user.join(" | ");
+    });
+
+    /* ======================================================
+       METHOD 2: CUSTOM PROMISE + FETCH + ERROR CONTROL
+       ====================================================== */
+
+    let siteUrl = "https://official-joke-api.appspot.com/random_joke";
+    let err = false; // change to true to trigger error
+
+    const paraa = document.querySelector("#paraa");
+
+    new Promise((resolve, reject) => {
+
+      // Manual error handling logic
+      if (!err) {
+        resolve(siteUrl); // success → goes to .then()
+      } else {
+        reject("Something went wrong intentionally"); // failure → goes to .catch()
+      }
+
+    })
+    .then((url) => {
+      // url comes from resolve(siteUrl)
+      return fetch(url); // fetch returns a promise
+    })
+    .then((res) => {
+      // converting response to JSON
+      return res.json();
+    })
+    .then((joke) => {
+      // final usable data
+      paraa.innerText = "Promise + Fetch Joke → " + joke.setup + " — " + joke.punchline;
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+
+    /* ======================================================
+       METHOD 3: ASYNC / AWAIT (MODERN & INTERNSHIP STYLE)
+       ====================================================== */
+
+    const para2 = document.querySelector("#para2");
+
+    async function getJoke() {
+      try {
+        let err = false;
+
+        // manual error throwing
+        if (err) {
+          throw new Error("Forced error 😎");
+        }
+
+        // await pauses execution until promise resolves
+        const res = await fetch(siteUrl);
+        const joke = await res.json();
+
+        para2.innerText =
+          "Async/Await Joke → " + joke.setup + " — " + joke.punchline;
+
+      } catch (error) {
+        console.log("Error:", error.message);
+      }
+    }
+
+    getJoke();
+
+    /* ======================================================
+       METHOD 4: DIRECT FETCH (MOST COMMON USAGE)
+       ====================================================== */
+
+    const thirdPara = document.querySelector("#thirdPara");
+
+    fetch(siteUrl)
+      .then((res) => res.json())
+      .then((joke) => {
+        thirdPara.innerText =
+          "Direct Fetch Joke → " + joke.setup + " — " + joke.punchline;
+      })
+      .catch((err) => console.log("Error:", err));
+
+  </script>
+</body>
+</html>
