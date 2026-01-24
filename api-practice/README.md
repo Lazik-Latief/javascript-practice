@@ -86,3 +86,18 @@ This project is part of my learning process to:
 
 ---
 
+## Update >>> 24th jan
+
+📌 README Update
+
+This project is a practice of JavaScript Promises and async data handling.
+User data is wrapped inside Promises to simulate real API responses.
+Promise.resolve() is used to return already-available data in an async way.
+Promises are consumed using .then() just like real fetch calls.
+A reusable renderUser() function is created to generate UI HTML.
+This avoids repeating the same markup for each Promise.
+The same UI structure is rendered in multiple cards with different data.
+CSS cards are used for a clean and readable layout.
+The focus is on separation of data logic and UI rendering.
+This practice builds a foundation for real API usage and component-based design.
+

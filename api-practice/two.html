@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise UI Practice</title>
+
+    <style>
+      /* ===== Global Page Styling ===== */
+      body {
+        margin: 0;
+        padding: 40px;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2f3, #f9f9f9);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #222;
+      }
+
+      /* ===== Card Layout ===== */
+      .container {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ===== Card Component ===== */
+      .card {
+        background-color: #ffffff;
+        width: 260px;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      .card h3 {
+        margin-top: 0;
+        margin-bottom: 12px;
+        color: #444;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 6px;
+      }
+
+      /* ===== User Info ===== */
+      .info {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #444;
+      }
+
+      .label {
+        font-weight: bold;
+        color: #111;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Promise Data Rendered Using Reusable Components</h1>
+
+    <!-- ===== UI Cards ===== -->
+    <div class="container">
+      <div class="card">
+        <h3>Card One</h3>
+        <div class="info one-para"></div>
+      </div>
+
+      <div class="card">
+        <h3>Card Two</h3>
+        <div class="info two-para"></div>
+      </div>
+
+      <div class="card">
+        <h3>Card Three</h3>
+        <div class="info three-para"></div>
+      </div>
+
+      <div class="card">
+        <h3>Card Four</h3>
+        <div class="info four-para"></div>
+      </div>
+    </div>
+
+    <script>
+      /* =========================================
+       PROMISES (Simulating API / Async Data)
+       ========================================= */
+
+      // const promiseOne = Promise.resolve({
+      //   username: "Rayyah Shah",
+      //   phn: 7889943194,
+      //   address: { town: "Sopore", distt: "Baramulla", city: "Srinagar" }
+      // });
+
+      const promiseOne = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({
+            username: "Lazik Lone",
+            phn: 9797685148,
+            address: { town: "Sopore", distt: "Baramulla", city: "Srinagar" },
+          });
+        }, 1000);
+      });
+
+      const promiseTwo = Promise.resolve({
+        username: "Lazik Lone",
+        phn: 9797685148,
+        address: { town: "Sopore", distt: "Baramulla", city: "Srinagar" },
+      });
+
+      const promiseThree = Promise.resolve({
+        username: "Lukman Latief",
+        phn: 9596215955,
+        address: { town: "Watlab", distt: "Baramulla", city: "Srinagar" },
+      });
+
+      // ✅ 4th example added by me
+      const promiseFour = Promise.resolve({
+        username: "Ayaan Ahmad",
+        phn: 9876543210,
+        address: { town: "Pattan", distt: "Baramulla", city: "Srinagar" },
+      });
+
+      /* =========================================
+       SELECT UI ELEMENTS (DOM References)
+       ========================================= */
+
+      const paraOne = document.querySelector(".one-para");
+      const paraTwo = document.querySelector(".two-para");
+      const paraThree = document.querySelector(".three-para");
+      const paraFour = document.querySelector(".four-para");
+
+      /* =========================================
+       REUSABLE UI COMPONENT (Template Function)
+       ========================================= */
+
+      // This function acts like a "component"
+      function renderUser(user) {
+        return `
+        <div><span class="label">Name:</span> ${user.username}</div>
+        <div><span class="label">Phone:</span> ${user.phn}</div>
+        <div><span class="label">Town:</span> ${user.address.town}</div>
+        <div><span class="label">District:</span> ${user.address.distt}</div>
+        <div><span class="label">City:</span> ${user.address.city}</div>
+      `;
+      }
+
+      /* =========================================
+       CONSUME PROMISES & RENDER UI
+       ========================================= */
+
+      promiseOne.then((user) => (paraOne.innerHTML = renderUser(user)));
+      promiseTwo.then((user) => (paraTwo.innerHTML = renderUser(user)));
+      promiseThree.then((user) => (paraThree.innerHTML = renderUser(user)));
+      promiseFour.then((user) => (paraFour.innerHTML = renderUser(user)));
+
+      // Before this i used this
+      // promiseOne.then((user) => {
+      //   // Reusable UI template
+      //   const userHTML = `
+      //     <div><span class="label">Name:</span> ${user.username}</div>
+      //     <div><span class="label">Phone:</span> ${user.phn}</div>
+      //     <div><span class="label">Town:</span> ${user.address.town}</div>
+      //     <div><span class="label">District:</span> ${user.address.distt}</div>
+      //     <div><span class="label">City:</span> ${user.address.city}</div>
+      //   `;
+
+      //   // Render same data in all cards
+      //   paraOne.innerHTML = userHTML;
+      //   // paraTwo.innerHTML = userHTML;
+      //   // paraThree.innerHTML = userHTML;
+      // });
+
+      // promiseTwo.then((user) => {
+      //   // Reusable UI template
+      //   const userHTML = `
+      //     <div><span class="label">Name:</span> ${user.username}</div>
+      //     <div><span class="label">Phone:</span> ${user.phn}</div>
+      //     <div><span class="label">Town:</span> ${user.address.town}</div>
+      //     <div><span class="label">District:</span> ${user.address.distt}</div>
+      //     <div><span class="label">City:</span> ${user.address.city}</div>
+      //   `;
+
+      //   // Render same data in all cards
+      //   paraTwo.innerHTML = userHTML;
+      //   // paraTwo.innerHTML = userHTML;
+      //   // paraThree.innerHTML = userHTML;
+      // });
+    </script>
+  </body>
+</html>
