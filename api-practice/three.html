@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fetch</title>
+  </head>
+  <body>
+    <div class="para"></div>
+
+    <script>
+      const para = document.querySelector(".para");
+      const promiseOne = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve("https://api.github.com/users/octocat");
+        }, 2000);
+      });
+      promiseOne
+        .then((url) => fetch(url))
+        .then((res) => res.json())
+        .then((user) => {
+          para.innerHTML = `
+      <img src="${user.avatar_url}" width="120"/><br>
+      <b>${user.login}</b><br>
+      Repos: ${user.public_repos}
+    `;
+        });
+    </script>
+  </body>
+</html>
