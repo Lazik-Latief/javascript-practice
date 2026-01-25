@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CallBacks</title>
+  </head>
+  <body>
+    <script>
+
+      /* =====================================================
+         BASIC SYNCHRONOUS vs ASYNCHRONOUS EXECUTION
+         -----------------------------------------------------
+         JS runs code line by line (synchronous),
+         but async functions like setTimeout run later.
+      ===================================================== */
+
+      // console.log("one");
+      // console.log("two");
+      // setTimeout(() => {
+      //   console.log("callback after 1 second");
+      // }, 1000);
+      // console.log("three");
+
+      /* =====================================================
+         CALLBACK FUNCTIONS (Passing functions as arguments)
+         -----------------------------------------------------
+         - A callback is a function passed to another function
+         - Used to execute code after some operation
+      ===================================================== */
+
+      // function sum(a, b){
+      //   console.log(a + b);
+      // }
+
+      // function calculator(a, b, sumCallback){
+      //   sumCallback(a, b);
+      // }
+
+      // calculator(1, 4, sum);
+      // calculator(3, 4, sum);
+
+      /* =====================================================
+         CALLBACK WITH DIFFERENT FUNCTIONS
+         -----------------------------------------------------
+         Same function behaves differently based on callback
+      ===================================================== */
+
+      // function one(c, f){
+      //   console.log(c , f );
+      // }
+
+      // calculator(9, 6, one);
+      // calculator(7, 4, one);
+
+      /* =====================================================
+         CALLBACK + setTimeout
+         -----------------------------------------------------
+         Passing a function reference to run later
+      ===================================================== */
+
+      // const hello = function () {
+      //   console.log("hello by callback after 2 seconds");
+      // };
+      // setTimeout(hello, 2000);
+
+      /* =====================================================
+         CALLBACK HELL (Nested callbacks problem)
+         -----------------------------------------------------
+         When callbacks depend on previous callbacks,
+         code becomes hard to read and maintain
+      ===================================================== */
+
+      // function getData(dataId, getNextData) {
+      //   setTimeout(() => {
+      //     console.log("data", dataId);
+      //     if (getNextData) {
+      //       getNextData();
+      //     }
+      //   }, 2000);
+      // }
+
+      // getData(1, () => {
+      //   getData(2, () => {
+      //     getData(3, () => {
+      //       getData(4);
+      //     });
+      //   });
+      // });
+
+      /* =====================================================
+         INTRODUCTION TO PROMISES
+         -----------------------------------------------------
+         Promises solve callback hell
+         Promise has 3 states:
+         - pending
+         - fulfilled (resolve)
+         - rejected (reject)
+      ===================================================== */
+
+      // let promise = new Promise((resolve, reject)=>{
+      //   console.log('i am a promise');
+      //   resolve(123);
+      // });
+
+      /* =====================================================
+         PROMISE-BASED getData FUNCTION
+         -----------------------------------------------------
+         Instead of callbacks, we return a Promise
+      ===================================================== */
+
+      // function getData(dataId){
+      //   return new Promise((resolve, reject)=>{
+      //     setTimeout(() => {
+      //       console.log("data", dataId);
+      //       resolve("success ho gaya");
+      //     }, 5000);
+      //   })
+      // }
+
+      /* =====================================================
+         PROMISE RESOLVE & REJECT
+         -----------------------------------------------------
+         Handling success with .then()
+         Handling errors with .catch()
+      ===================================================== */
+
+      // const getPromise = ()=>{
+      //   return new Promise((resolve, reject)=>{
+      //     console.log("success");
+      //     reject("promise rejected");
+      //   });
+      // };
+
+      // let promise = getPromise();
+      // promise.then((res)=>{
+      //   console.log("promise fulfilled", res);
+      // });
+      // promise.catch((err)=>{
+      //   console.log("promise rejected", err);
+      // });
+
+      /* =====================================================
+         PROMISE CHAINING
+         -----------------------------------------------------
+         Each .then() returns a promise
+         Makes async flow readable
+      ===================================================== */
+
+      // function asyncFunction(){
+      //   return new Promise((resolve)=>{
+      //     setTimeout(()=>{
+      //       console.log("data1");
+      //       resolve("success");
+      //     }, 4000);
+      //   });
+      // }
+
+      // asyncFunction().then(res=>{
+      //   console.log(res);
+      // });
+
+      /* =====================================================
+         MULTIPLE PROMISES (CHAINED)
+         -----------------------------------------------------
+         Avoid nesting by returning promises
+      ===================================================== */
+
+      // getData(1)
+      //   .then(res => {
+      //     console.log(res);
+      //     return getData(2);
+      //   })
+      //   .then(res => {
+      //     console.log(res);
+      //     return getData(3);
+      //   })
+      //   .then(res => {
+      //     console.log(res);
+      //   });
+
+      /* =====================================================
+         ASYNC / AWAIT
+         -----------------------------------------------------
+         - Cleaner syntax over .then()
+         - await pauses execution until promise resolves
+      ===================================================== */
+
+      function getData(dataId){
+        return new Promise((resolve)=>{
+          setTimeout(()=>{
+            console.log("data", dataId);
+            resolve("success");
+          }, 2000);
+        });
+      }
+
+      async function getAllData(){
+        console.log("getting data1...");
+        await getData(1);
+
+        console.log("getting data2...");
+        await getData(2);
+
+        console.log("getting data3...");
+        await getData(3);
+
+        console.log("getting data4...");
+        await getData(4);
+      }
+
+      /* =====================================================
+         IIFE (Immediately Invoked Function Expression)
+         -----------------------------------------------------
+         Used to run async code immediately
+         without calling the function manually
+      ===================================================== */
+
+      (
+        async function(){
+          console.log("getting data1...");
+          await getData(1);
+          console.log("getting data2...");
+          await getData(2);
+          console.log("getting data3...");
+          await getData(3);
+          console.log("getting data4...");
+          await getData(4);
+        }
+      )();
+
+      /* =====================================================
+         ARROW FUNCTION IIFE (Modern Style)
+         -----------------------------------------------------
+         Shortest and cleanest async execution pattern
+      ===================================================== */
+
+      (async ()=>{
+        console.log("getting data1...");
+        await getData(1);
+        console.log("getting data2...");
+        await getData(2);
+        console.log("getting data3...");
+        await getData(3);
+        console.log("getting data4...");
+        await getData(4);
+      })();
+
+//  What I learned TODAY (summary)
+
+// Difference between sync & async code
+
+// Callbacks and why they get messy
+
+// Callback hell problem
+
+// Promises (resolve, reject, .then(), .catch())
+
+// Promise chaining
+
+// Async / Await (cleanest approach)
+
+// IIFE for auto-running async code
+
+    </script>
+  </body>
+</html>
