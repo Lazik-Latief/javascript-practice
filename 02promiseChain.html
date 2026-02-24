@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Promise Chaining UI</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+    color: white;
+  }
+
+  .card {
+    background: #181818;
+    padding: 40px;
+    width: 400px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.1);
+  }
+
+  h2 {
+    margin-bottom: 25px;
+    color: #ffd700;
+  }
+
+  button {
+    padding: 12px 20px;
+    background: linear-gradient(90deg, #ffd700, #ffb700);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+  }
+
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .steps {
+    margin-top: 25px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .step {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background: #222;
+    transition: 0.3s;
+  }
+
+  .loading { color: #ccc; }
+  .success { color: #00ff99; }
+  .error { color: #ff4d4d; }
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Promise Chaining Flow</h2>
+  <button id="startBtn">Start Process</button>
+
+  <div class="steps">
+    <div id="step1" class="step">Step 1: Waiting...</div>
+    <div id="step2" class="step">Step 2: Waiting...</div>
+    <div id="final" class="step">Final Result: -</div>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById("startBtn");
+  const step1UI = document.getElementById("step1");
+  const step2UI = document.getElementById("step2");
+  const finalUI = document.getElementById("final");
+
+  function step1() {
+    step1UI.textContent = "Step 1: Loading...";
+    step1UI.className = "step loading";
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        step1UI.textContent = "Step 1: Completed";
+        step1UI.className = "step success";
+        resolve("Data from step 1");
+      }, 1000);
+    });
+  }
+
+  function step2(data) {
+    step2UI.textContent = "Step 2: Loading...";
+    step2UI.className = "step loading";
+
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const success = Math.random() > 0.3; // 70% success
+        
+        if (success) {
+          step2UI.textContent = "Step 2: Completed";
+          step2UI.className = "step success";
+          resolve(data + " → Processed in step 2");
+        } else {
+          step2UI.textContent = "Step 2: Failed";
+          step2UI.className = "step error";
+          reject("Step 2 failed!");
+        }
+      }, 1000);
+    });
+  }
+
+  btn.addEventListener("click", () => {
+    btn.disabled = true;
+
+    // Reset UI
+    step1UI.textContent = "Step 1: Waiting...";
+    step2UI.textContent = "Step 2: Waiting...";
+    finalUI.textContent = "Final Result: -";
+    step1UI.className = "step";
+    step2UI.className = "step";
+    finalUI.className = "step";
+
+    step1()
+      .then((data) => {
+        return step2(data); // chaining
+      })
+      .then((finalData) => {
+        finalUI.textContent = "Final Result: " + finalData;
+        finalUI.className = "step success";
+      })
+      .catch((err) => {
+        finalUI.textContent = "Error: " + err;
+        finalUI.className = "step error";
+      })
+      .finally(() => {
+        btn.disabled = false;
+        console.log("All done");
+      });
+  });
+</script>
+
+</body>
+</html>
