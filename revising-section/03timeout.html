@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <h1>Timeout Example</h1>
+     <button id="stop">Stop Timeout</button>
+     <script>
+        setTimeout(function() {
+            alert("after 3 seconds you are here and now you can stop the timeout of next event !");
+        }, 3000);
+        // To stop the timeout before it executes:
+        const timeoutId = setTimeout(function() {
+            alert("This will NOT show if stopped!");
+        }, 5000);
+        document.getElementById("stop").addEventListener("click", function() {
+            clearTimeout(timeoutId);
+            alert("Timeout stopped!");
+        });
+     </script>
+</body>
+</html>
