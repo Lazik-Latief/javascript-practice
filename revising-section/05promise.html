@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Promises Practice - Users API</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+      color: #facc15;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 15px;
+      transition: 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      border: 1px solid #facc15;
+    }
+
+    .card h2 {
+      color: #facc15;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #ccc;
+      margin: 5px 0;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 18px;
+      color: #facc15;
+    }
+
+    .error {
+      text-align: center;
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Users Data (Promises Practice)</h1>
+
+  <p class="loading" id="loading">Loading users...</p>
+  <p class="error" id="error"></p>
+
+  <div class="container" id="userContainer"></div>
+
+  <script>
+    const container = document.getElementById("userContainer");
+    const loadingText = document.getElementById("loading");
+    const errorText = document.getElementById("error");
+
+    // PROMISE PRACTICE
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        return response.json();
+      })
+      .then(function(data) {
+        loadingText.style.display = "none";
+
+        data.forEach(function(user) {
+          const card = document.createElement("div");
+          card.classList.add("card");
+
+          card.innerHTML = `
+            <h2>${user.name}</h2>
+            <p><strong>Email:</strong> ${user.email}</p>
+            <p><strong>Phone:</strong> ${user.phone}</p>
+            <p><strong>Website:</strong> ${user.website}</p>
+            <p><strong>Company:</strong> ${user.company.name}</p>
+          `;
+
+          container.appendChild(card);
+        });
+      })
+      .catch(function(error) {
+        loadingText.style.display = "none";
+        errorText.textContent = error.message;
+      });
+  </script>
+
+</body>
+</html>
