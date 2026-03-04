@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promise Practice</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: #111827;
+      padding: 30px;
+      border-radius: 16px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #facc15;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .loading {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
+    .content {
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Promise Practice 🚀</h2>
+    <p>Click the button to fetch data</p>
+
+    <button id="fetchBtn">Get Data</button>
+
+    <div class="loading" id="loading"></div>
+    <div class="content" id="content"></div>
+  </div>
+
+  <script>
+    const button = document.getElementById("fetchBtn");
+    const content = document.getElementById("content");
+    const loading = document.getElementById("loading");
+
+    let clickCount = 0;
+
+    function fetchJoke() {
+      return fetch("https://official-joke-api.appspot.com/random_joke")
+        .then(response => response.json())
+        .then(data => {
+          return `${data.setup} 😂 <br><br> 👉 ${data.punchline}`;
+        });
+    }
+
+    function fetchAdvice() {
+      return fetch("https://api.adviceslip.com/advice")
+        .then(response => response.json())
+        .then(data => {
+          return `💡 Advice: ${data.slip.advice}`;
+        });
+    }
+
+    button.addEventListener("click", () => {
+      clickCount++;
+      loading.textContent = "Loading...";
+      content.innerHTML = "";
+
+      let promise;
+
+      if (clickCount === 1) {
+        promise = fetchJoke();
+      } else if (clickCount === 2) {
+        promise = fetchAdvice();
+      } else {
+        clickCount = 1;
+        promise = fetchJoke();
+      }
+
+      promise
+        .then(result => {
+          loading.textContent = "";
+          content.innerHTML = result;
+        })
+        .catch(error => {
+          loading.textContent = "";
+          content.innerHTML = "Something went wrong ❌";
+          console.error(error);
+        });
+    });
+  </script>
+
+</body>
+</html>
