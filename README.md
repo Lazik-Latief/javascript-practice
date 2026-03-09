@@ -76,6 +76,13 @@ JavaScript (ES6+)
 HTML5
 
 CSS3
+
+---
+
+#Here are the Screenshots of the files I practiced :
+1) APIs : Jokes and Advice
+   <img width="841" height="406" alt="image" src="https://github.com/user-attachments/assets/301bbea8-6884-4ddd-9320-2803e82cc6f9" />
+ 
 ---
 
 ## Status
