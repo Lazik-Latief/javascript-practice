@@ -67,57 +67,120 @@
     <div class="content" id="content"></div>
   </div>
 
-  <script>
+<script>
+    // Get button element from HTML using its ID
     const button = document.getElementById("fetchBtn");
+
+    // This element will display the joke/advice
     const content = document.getElementById("content");
+
+    // This element will show "Loading..." text
     const loading = document.getElementById("loading");
 
+    // Variable to track how many times the button is clicked
     let clickCount = 0;
 
+
+    // FUNCTION 1: Fetch a random joke from an API
     function fetchJoke() {
+
+      // fetch() sends a request to the API and returns a Promise
       return fetch("https://official-joke-api.appspot.com/random_joke")
+
+        // When the response comes, convert it to JSON
         .then(response => response.json())
+
+        // Now we get the actual data from the API
         .then(data => {
+
+          // Return formatted joke text
           return `${data.setup} 😂 <br><br> 👉 ${data.punchline}`;
         });
     }
 
+
+    // FUNCTION 2: Fetch advice from another API
     function fetchAdvice() {
+
+      // Send request to advice API
       return fetch("https://api.adviceslip.com/advice")
+
+        // Convert response to JSON
         .then(response => response.json())
+
+        // Extract advice text
         .then(data => {
+
+          // Return formatted advice message
           return `💡 Advice: ${data.slip.advice}`;
         });
     }
 
+
+    // Add click event listener to the button
     button.addEventListener("click", () => {
+
+      // Increase click count each time button is pressed
       clickCount++;
+
+      // Show loading message while fetching data
       loading.textContent = "Loading...";
+
+      // Clear previous content
       content.innerHTML = "";
 
+      // This variable will hold the promise (joke or advice)
       let promise;
 
+
+      // Logic to decide which API to call
       if (clickCount === 1) {
+
+        // First click → fetch joke
         promise = fetchJoke();
+
       } else if (clickCount === 2) {
+
+        // Second click → fetch advice
         promise = fetchAdvice();
+
       } else {
+
+        // After second click → reset counter
         clickCount = 1;
+
+        // Fetch joke again
         promise = fetchJoke();
       }
 
+
+      // Handle the Promise result
       promise
+
+        // If API request succeeds
         .then(result => {
+
+          // Remove loading text
           loading.textContent = "";
+
+          // Display result (joke/advice)
           content.innerHTML = result;
         })
+
+        // If something goes wrong
         .catch(error => {
+
+          // Remove loading message
           loading.textContent = "";
+
+          // Show error message to user
           content.innerHTML = "Something went wrong ❌";
+
+          // Log error in browser console for debugging
           console.error(error);
         });
     });
-  </script>
+</script>
 
 </body>
 </html>
