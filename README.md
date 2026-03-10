@@ -84,6 +84,9 @@ CSS3
    <img width="841" height="406" alt="image" src="https://github.com/user-attachments/assets/301bbea8-6884-4ddd-9320-2803e82cc6f9" />
  
 ---
+2) Random Users:
+   <img width="932" height="470" alt="image" src="https://github.com/user-attachments/assets/1df85cad-038a-435f-a145-fb0139843170" />
+---
 
 ## Status
 
