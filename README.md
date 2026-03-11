@@ -87,6 +87,10 @@ CSS3
 2) Random Users:
    <img width="932" height="470" alt="image" src="https://github.com/user-attachments/assets/1df85cad-038a-435f-a145-fb0139843170" />
 ---
+3) API:
+<img width="953" height="504" alt="image" src="https://github.com/user-attachments/assets/1fd0b54f-ba25-4f0c-ae9c-e745522bf53e" />
+
+   ---
 
 ## Status
 
