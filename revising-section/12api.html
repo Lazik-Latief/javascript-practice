@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>API Practice</title>
+
+<style>
+
+body{
+font-family:sans-serif;
+background:#0f172a;
+color:white;
+padding:40px;
+}
+
+h2{
+margin-top:50px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 20px rgba(0,0,0,0.4);
+}
+
+.loading{
+color:#38bdf8;
+}
+
+.error{
+color:#ef4444;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>API Fetch Practice</h1>
+
+<h2>Users</h2>
+<div id="usersContainer" class="grid"></div>
+
+<h2>Posts</h2>
+<div id="postsContainer" class="grid"></div>
+
+<h2>Weather</h2>
+<div id="weatherContainer"></div>
+
+<script>
+// API practice code will go here
+
+/*
+==========================================
+API PRACTICE FILE
+Topic: Fetching Data from APIs
+Examples:
+1. Fetch Users
+2. Fetch Posts
+3. Fetch Weather Data
+==========================================
+*/
+
+/*
+------------------------------------------
+UTILITY FUNCTION
+Creates loading UI
+------------------------------------------
+*/
+
+function showLoading(containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = `
+    <div class="loading">
+      Loading data...
+    </div>
+  `;
+}
+
+/*
+------------------------------------------
+UTILITY FUNCTION
+Shows error message
+------------------------------------------
+*/
+
+function showError(containerId, message) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = `
+    <div class="error">
+      ❌ Error: ${message}
+    </div>
+  `;
+}
+
+/*
+==========================================
+EXAMPLE 1
+FETCH USERS
+API: jsonplaceholder
+==========================================
+*/
+
+async function fetchUsers() {
+
+  showLoading("usersContainer");
+
+  try {
+
+    /*
+    Fetch request to API
+    */
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+
+    /*
+    Convert response into JSON
+    */
+    const users = await response.json();
+
+    const container = document.getElementById("usersContainer");
+
+    /*
+    Map through users and create UI cards
+    */
+
+    container.innerHTML = users
+      .map(
+        (user) => `
+      <div class="card">
+
+        <h3>${user.name}</h3>
+
+        <p>📧 ${user.email}</p>
+
+        <p>🏢 ${user.company.name}</p>
+
+        <p>🌐 ${user.website}</p>
+
+      </div>
+    `
+      )
+      .join("");
+
+  } catch (error) {
+
+    showError("usersContainer", error.message);
+
+  }
+}
+
+/*
+==========================================
+EXAMPLE 2
+FETCH POSTS
+==========================================
+*/
+
+async function fetchPosts() {
+
+  showLoading("postsContainer");
+
+  try {
+
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/posts?_limit=6"
+    );
+
+    const posts = await response.json();
+
+    const container = document.getElementById("postsContainer");
+
+    container.innerHTML = posts
+      .map(
+        (post) => `
+      <div class="card">
+
+        <h3>${post.title}</h3>
+
+        <p>${post.body}</p>
+
+      </div>
+    `
+      )
+      .join("");
+
+  } catch (error) {
+
+    showError("postsContainer", error.message);
+
+  }
+}
+
+/*
+==========================================
+EXAMPLE 3
+FETCH WEATHER DATA
+Using Open-Meteo API
+(No API key required)
+==========================================
+*/
+
+async function fetchWeather() {
+
+  showLoading("weatherContainer");
+
+  try {
+
+    const response = await fetch(
+      "https://api.open-meteo.com/v1/forecast?latitude=31.6&longitude=74.3&current_weather=true"
+    );
+
+    const data = await response.json();
+
+    const weather = data.current_weather;
+
+    const container = document.getElementById("weatherContainer");
+
+    container.innerHTML = `
+      <div class="card">
+
+        <h3>🌤 Current Weather</h3>
+
+        <p>Temperature: ${weather.temperature}°C</p>
+
+        <p>Wind Speed: ${weather.windspeed} km/h</p>
+
+        <p>Time: ${weather.time}</p>
+
+      </div>
+    `;
+
+  } catch (error) {
+
+    showError("weatherContainer", error.message);
+
+  }
+}
+
+/*
+==========================================
+CALL FUNCTIONS
+==========================================
+*/
+
+fetchUsers();
+fetchPosts();
+fetchWeather();
+</script>
+
+</body>
+</html>
