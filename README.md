@@ -91,8 +91,11 @@ CSS3
 <img width="953" height="504" alt="image" src="https://github.com/user-attachments/assets/1fd0b54f-ba25-4f0c-ae9c-e745522bf53e" />
 
    ---
-
-## Status
+  # # 15thMarch
+  
+  revising the js series ^^^
+  ---
+  ## Status
 
 ✅ Most core topics completed
 🔄 Continuously improving and adding more practice
