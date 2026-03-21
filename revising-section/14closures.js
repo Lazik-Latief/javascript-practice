@@ -94,4 +94,4 @@ console.log(fastSquare(9));  // computed → 81
 //  • Common use-cases: counters, factories, memoization,
 //    event handlers, and module patterns.
 // ============================================================
- 
+  
